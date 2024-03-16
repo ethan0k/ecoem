@@ -1,0 +1,185 @@
+﻿<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Consorzio Ecoem</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+
+    <link rel="shortcut icon" href="imagefs/favicon.ico" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cuprum" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bree+Serif" />
+    <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css" media="screen" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/bootstrap-responsive.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/tables.css" />
+    <link rel="stylesheet" href="css/chosen.css" />
+    <link rel="stylesheet" href="css/tipTip.css" />
+    <link rel="stylesheet" href="css/jquery.jscrollpane.css" />
+    <link rel="stylesheet" href="lib/Datepicker/ui.daterangepicker.css" />
+
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="aspnetForm" runat="server" class="customForm">
+
+        <asp:ScriptManager ID="mainScriptManager" runat="server" EnablePartialRendering="true" EnablePageMethods="true">
+            <Scripts>
+                <asp:ScriptReference Path="~/lib/jquery-1.9.1.min.js" />
+                <asp:ScriptReference Path="~/lib/jquery-ui-1.10.3.custom.min.js" />
+                <asp:ScriptReference Path="~/lib/bootstrap.js" />
+                <asp:ScriptReference Path="~/lib/jquery.tipTip.minified.js" />
+                <asp:ScriptReference Path="~/lib/forms.js" />
+                <asp:ScriptReference Path="~/lib/chosen.jquery.js" />
+                <asp:ScriptReference Path="~/lib/jquery.jscrollpane.min.js" />
+                <asp:ScriptReference Path="~/lib/jquery.tzCheckbox.js" />
+                <asp:ScriptReference Path="~/lib/jquery.alerts.js" />
+                <asp:ScriptReference Path="~/lib/functions.js" />
+                <asp:ScriptReference Path="~/lib/jquery.numeric.min.js" />    
+                <asp:ScriptReference Path="https://cdn.jsdelivr.net/npm/autonumeric@4.1.0"/>
+                <asp:ScriptReference Path="~/lib/Datepicker/date-it-IT.js"/>   
+                <asp:ScriptReference Path="~/lib/Datepicker/jquery.ui.datepicker-it.js"/>   
+                <asp:ScriptReference Path="~/lib/Datepicker/daterangepicker.jQuery.js"/>  
+            </Scripts>
+        </asp:ScriptManager>
+        <!--[if lt IE 9]>
+	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	    <![endif]-->
+        <!--[if lte IE 8]><script type="text/javascript" src="lib/excanvas.min.js"></script><![endif]-->
+        <script>
+            jQuery(document).ready(function () {
+
+            });
+        </script>
+        <div id="container-main">
+            <div id="container">
+                <!--Header-->
+                    <div class="header">
+                        <!--User Profile-->
+                            <div class="profile">
+                                <div class="avatar">
+                                    <asp:Image runat="server" ID="Avatar" ImageUrl="~/images/avatar.png" />
+                                </div>
+                                <div class="info-prof">
+                                    Benvenuto, <strong>
+                                        <asp:LoginName ID="adminLoginName" runat="server" />
+                                    </strong>
+                                </div>
+                            </div>
+                        <!--User Profile END-->
+                   <div class="search">
+
+                        <h1 style="color:white">Consorzio Ecoem</h1> 
+                        
+                    </div>
+                        <div class="buttons-head">
+                            <div class="button-profile-2">
+                                <asp:LoginStatus ID="adminLoginStatus" runat="server" />
+                            </div>
+                        </div>
+
+                </div>
+                <!--Header END-->
+
+                <!--SpeedBar-->
+                <div class="speedbar">
+                    <div class="bar-online"><strong>Server date:</strong> <%= Now.ToString("dd/MM/yyyy")%> </div>
+                    <asp:ContentPlaceHolder ID="speedBarPlaceHolder" runat="server"></asp:ContentPlaceHolder>
+                </div>
+                <div class="speedbar-shadow"></div>
+                <!--SpeedBar END-->
+
+
+                <!--Content-->
+                <div id="content">
+                    <div class="content">
+                        <asp:ContentPlaceHolder ID="mainContentPlaceHolder" runat="server">
+
+                        </asp:ContentPlaceHolder>
+                        <div class="clear"></div>
+                    </div>
+                    <!--class .content end-->
+
+                </div>
+                <!-- #content END-->
+
+            </div>
+            <!-- #container END-->
+
+            <!--sideLeft-->
+            <aside id="sideLeft">
+
+                <!--Menu-->
+                <a id="menu"></a>
+
+                <asp:Repeater ID="menuRepeater" runat="server" DataSourceID="mainMenuSiteMapDataSource">
+                    <HeaderTemplate>
+                        <ul class="menu">
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <li class='<%# If(CheckChildSelect(CType(Container.DataItem, SiteMapNode)), "expand", "")%>'>
+                            <a href='#'>
+                                <span class="four-prong"><%# Eval("Title") %></span>
+                            </a>
+
+                            <ul class="acitem">
+                                <asp:Repeater ID="subMenuRepeater" runat="server" DataSourceID="subMenuSiteMapDataSource">
+                                    <ItemTemplate>
+                                        <li style="padding-left:15px" class='<%# If(Not CType(Container.DataItem, SiteMapNode).HasChildNodes, If(CheckSelect(CType(Container.DataItem, SiteMapNode)), "select_item", ""), If(CheckChildSelect(CType(Container.DataItem, SiteMapNode)), "expand", ""))%>'>
+
+                                            <asp:HyperLink ID="subMenuItemHyperLink" runat="server" NavigateUrl='<%# If(Not CType(Container.DataItem, SiteMapNode).HasChildNodes, Eval("Url"), "")%>'
+                                                ToolTip='<%# Eval("Description") %>'>
+                                                <asp:Label ID="arrorwLabel" runat="server" CssClass='<%# If(CType(Container.DataItem, SiteMapNode).HasChildNodes, "four-prong", "") %>' Text='<%# Eval("Title") %>'></asp:Label>
+                                            </asp:HyperLink>
+
+                                            <asp:ContentPlaceHolder ID="submenuLevel3PlaceHolder" runat="server" Visible='<%# If(CType(Container.DataItem, SiteMapNode).HasChildNodes, True, False) %>'>
+                                                <ul class="acitem">
+                                                    <asp:Repeater ID="subMenu2Repeater" runat="server" DataSourceID="subMenu2SiteMapDataSource">
+                                                        <HeaderTemplate>
+                                                        </HeaderTemplate>
+                                                        <ItemTemplate>
+                                                            <li class='<%# If(CheckSelect(CType(Container.DataItem, SiteMapNode)), "select_item", "")%>'>
+                                                                <asp:HyperLink ID="subMenu2ItemHyperLink" runat="server" NavigateUrl='<%# Eval("Url") %>'
+                                                                    ToolTip='<%# Eval("Description") %>' Text='<%# Eval("Title") %>'>
+                                                                </asp:HyperLink>
+                                                            </li>
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                        </FooterTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+                                            </asp:ContentPlaceHolder>
+
+                                            <asp:SiteMapDataSource ID="subMenu2SiteMapDataSource" runat="server" StartingNodeOffset="0"
+                                                ShowStartingNode="false" StartingNodeUrl='<%# Eval("Url") %>' />
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+
+
+                            <asp:SiteMapDataSource ID="subMenuSiteMapDataSource" runat="server" StartingNodeOffset="0"
+                                ShowStartingNode="false" StartingNodeUrl='<%# Eval("Url") %>' />
+                        </li>
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </ul>
+                    </FooterTemplate>
+                </asp:Repeater>
+                <asp:SiteMapDataSource ID="mainMenuSiteMapDataSource" runat="server" ShowStartingNode="false" />
+                <!--Menu END-->
+
+            </aside>
+            <!-- #sideLeft END-->
+
+        </div>
+        <!-- #container main END-->
+
+    </form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="" title="ROOT" description="ROOT" roles="*">
+    <siteMapNode url="00" title="Home" description="Home" roles="*">
+      <siteMapNode url="~/WebApp/Dashboard/Dashboard.aspx" title="Dashboard" roles="*"></siteMapNode>
+      <siteMapNode url="~/WebApp/Dashboard/ListaLog.aspx" title="Log" roles="Amministratore"></siteMapNode>
+    </siteMapNode>
+    <siteMapNode url="~/WebApp/Impianti/" title="Impianti" description="Impianti" roles="*">
+      <siteMapNode url="~/WebApp/Impianti/ListaImpianti.aspx" title="Lista impianti" roles="Amministratore,Monitor,Utente,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Impianti/UploadPannelli.aspx" title="Upload file" roles="Amministratore,Utente,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Impianti/Aggiungi.aspx" title="Upload manuale" roles="Amministratore,Utente,Operatore"></siteMapNode>
+    </siteMapNode>
+    <siteMapNode url="~/WebApp/Pannelli/" title="Pannelli" description="Pannelli" roles="*">
+      <siteMapNode url="~/WebApp/Pannelli/ListaPannelli.aspx" title="Lista pannelli" roles="Amministratore,Monitor,Produttore,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Pannelli/ListaProtocolli.aspx" title="Lista protocolli" roles="Amministratore,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Pannelli/Upload.aspx" title="Upload" roles="Amministratore,Produttore,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Pannelli/UploadDismessi.aspx" title="Upload dismessi" roles="Amministratore,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Pannelli/VerificaPannelli.aspx" title="Verifica pannelli" roles="Amministratore"></siteMapNode>
+    </siteMapNode>
+    <siteMapNode url="~/WebApp/Dichiarazioni/" title="Eco-contributi" description="Dichiarazioni ECO-Contributi" roles="Amministratore,Produttore,Operatore">
+      <siteMapNode url="~/WebApp/Dichiarazioni/ListaDichiarazioni.aspx" title="Lista dichiarazioni" roles="Amministratore,Produttore,Operatore"></siteMapNode>      
+      <siteMapNode url="~/WebApp/Dichiarazioni/VerificaDichiarazioni.aspx" title="Verifica dichiarazioni" roles="Amministratore,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Dichiarazioni/ListaAutocertificazioni.aspx" title="Lista autocertificazioni" roles="Amministratore,Produttore,Operatore"></siteMapNode>
+	  <siteMapNode url="~/WebApp/Dichiarazioni/VerificaAutocertificazioni.aspx" title="Verifica certificazioni" roles="Amministratore,Operatore"></siteMapNode>
+    </siteMapNode>
+    <siteMapNode url="~/WebApp/DichiarazioniProf/" title="Dichiarazioni professionali" description="Dichiarazioni ECO-Contributi" roles="Professionale,Operatore">
+      <siteMapNode url="~/WebApp/DichiarazioniProf/ListaDichiarazioniProf.aspx" title="Lista dichiarazioni professionali" roles="Professionale,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/DichiarazioniProf/VerificaDichiarazioni.aspx" title="Verifica dichiarazioni" roles="Amministratore,Operatore"></siteMapNode>
+    </siteMapNode>
+	<siteMapNode url="~/WebApp/Tariffari/" title="Documenti e certificati" description="Documenti e certificati" roles="Amministratore,Produttore">
+		<siteMapNode url="~/WebApp/Tariffari/TariffarioD.aspx" title="Tariffario dual use" roles="Produttore"></siteMapNode>
+		<siteMapNode url="~/WebApp/Tariffari/TariffarioP.aspx" title="Tariffario professionale" roles="Produttore"></siteMapNode>
+		<siteMapNode url="~/WebApp/Tariffari/Tariffario.aspx" title="Tariffario pannelli fotovoltaici" roles="Produttore"></siteMapNode>
+		<siteMapNode url="~/WebApp/Tariffari/Certificati.aspx" title="Certificati di adesione - rinnovabili" roles="Amministratore,Produttore"></siteMapNode>
+	</siteMapNode>
+	  <siteMapNode url="~/WebApp/Amministrazione/" title="Amministrazione" description="Amministrazione" roles="Amministratore,Operatore">
+      <siteMapNode url="~/WebApp/Amministrazione/ListaUtenti.aspx" title="Lista utenti" description="Lista utenti" roles="Amministratore,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Amministrazione/ListaProduttori.aspx" title="Lista produttori" description="Lista produttori" roles="Amministratore,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Amministrazione/ListaClienti.aspx" title="Lista clienti" description="Lista installatori/clienti" roles="Amministratore,Operatore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Amministrazione/ListaCategorie.aspx" title="Lista categorie" description="Lista categorie" roles="Amministratore"></siteMapNode>
+	  <siteMapNode url="~/WebApp/Amministrazione/ListaFasce.aspx" title="Fasce di peso PV" description="Lista fasce di peso" roles="Amministratore"></siteMapNode>
+	  <siteMapNode url="~/WebApp/Amministrazione/ListaTipologie.aspx" title="Tipologie celle PV" description="Lista tipologie celle" roles="Amministratore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Amministrazione/ListaManuali.aspx" title="Manualistica" description="Lista manuali" roles="Amministratore"></siteMapNode>
+      <siteMapNode url="~/WebApp/Amministrazione/Opzioni.aspx" title="Opzioni" description="Opzioni di sistema" roles="Amministratore"></siteMapNode>
+    </siteMapNode>
+    <siteMapNode url="~/WebApp/Dashboard/" title="Manualistica" description="Manuali d'uso" roles="*">
+      <siteMapNode url="~/WebApp/Dashboard/Manualistica.aspx" title="Manuali" description="Manuali d'uso" roles="*"></siteMapNode>
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>
