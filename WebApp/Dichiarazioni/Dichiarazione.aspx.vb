@@ -197,14 +197,15 @@ Partial Class WebApp_Amministrazione_Dichiarazione
             Dichiarazione.Utente = Page.User.Identity.Name
             Dichiarazione.Save()
 
-                Dim ListaCategorie As List(Of Categoria_ProduttoreNew)
-                ListaCategorie = Categoria_ProduttoreNew.Lista(ddlProduttori.SelectedValue, False)
-                If ListaCategorie Is Nothing Then
-                    Page.ClientScript.RegisterStartupScript(Me.GetType(), "showModal", "jAlert('Anagrafica Produttore senza categorie.'" & ", 'Messaggio errore');", True)
-                    Exit Sub
-                End If
+            Dim ListaCategorie As List(Of Categoria_ProduttoreNew)
+            ListaCategorie = Categoria_ProduttoreNew.Lista(ddlProduttori.SelectedValue, False)
+            If ListaCategorie Is Nothing Then
+                Page.ClientScript.RegisterStartupScript(Me.GetType(), "showModal", "jAlert('Anagrafica Produttore senza categorie.'" & ", 'Messaggio errore');", True)
+                Exit Sub
+            End If
 
-                For Each CategoriaInLista In ListaCategorie
+            For Each CategoriaInLista In ListaCategorie
+                If Not CategoriaInLista.Disattiva Then
                     Dim NuovaRiga As New RigaDichiarazione
                     Dim Categoria As CategoriaNew = CategoriaNew.Carica(CategoriaInLista.IdCategoria)
                     NuovaRiga.IdCategoria = CategoriaInLista.IdCategoria
@@ -212,17 +213,18 @@ Partial Class WebApp_Amministrazione_Dichiarazione
                     NuovaRiga.TipoDiDato = Categoria.TipoDiDato
                     NuovaRiga.Pezzi = 0
                     NuovaRiga.CostoUnitario = CategoriaInLista.Costo
-                NuovaRiga.Importo = 0
-                NuovaRiga.UtenteAggiornamento = Page.User.Identity.Name
-                NuovaRiga.DataAggiornamento = Today
-                NuovaRiga.Save()
-                Next
+                    NuovaRiga.Importo = 0
+                    NuovaRiga.UtenteAggiornamento = Page.User.Identity.Name
+                    NuovaRiga.DataAggiornamento = Today
+                    NuovaRiga.Save()
+                End If
+            Next
 
-                ddlProduttori.Enabled = False
-                txtData.Text = Dichiarazione.Data
-                txtImporto.Text = 0
-                cmdRiapri.Visible = False
-            End If
+            ddlProduttori.Enabled = False
+            txtData.Text = Dichiarazione.Data
+            txtImporto.Text = 0
+            cmdRiapri.Visible = False
+        End If
 
         Response.Redirect("Dichiarazione.aspx?id=" & Dichiarazione.Id)
 

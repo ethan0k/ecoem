@@ -260,6 +260,12 @@
                 </asp:DropDownList>
             </div>
         </div>
+        <div class="control-group" runat="server" id="groupCosto" visible="false">            
+             <label class="control-label">Costo:</label>
+             <div class="controls">
+                 <asp:TextBox CssClass="medium v-name" ID="txtCosto" runat="server" Enabled="false" />
+             </div>
+         </div>
         <div class="control-group">            
             <label class="control-label">Responsabile:</label>
             <div class="controls">

@@ -82,22 +82,22 @@ Partial Class WebApp_Impianti_ListaImpianti
                     End If
                 Next
 
-                pdfTools.CreateDocument(Server.MapPath("~/Template/Certificato_new.pdf"), Response.OutputStream, New DocInfo() With { _
-                    .No = Impianto.Attestato, _
-                    .Producer = currentProduttore.RagioneSociale, _
-                    .FirstName = Impianto.Responsabile, _
-                    .LastName = "", _
-                    .Address = Impianto.Indirizzo, _
-                    .GseNumber = Impianto.NrPraticaGSE, _
-                    .ServiceStartDate = Impianto.DataEntrataInEsercizio, _
-                    .City = Impianto.Città, _
-                    .Region = Impianto.Regione, _
-                    .Cap = Impianto.Cap, _
-                    .Longitude = Impianto.Longitudine, _
-                    .Latitude = Impianto.Latitudine, _
-                    .ContoEnergia = Trim(Impianto.ContoEnergia), _
-                    .Quantity = ListaPannelli.Count, _
-                    .ModuleSerialNumbers = serialNumbers _
+                pdfTools.CreateDocument(Server.MapPath("~/Template/Certificato_new.pdf"), Response.OutputStream, New DocInfo() With {
+                    .No = Impianto.Attestato,
+                    .Producer = currentProduttore.RagioneSociale,
+                    .FirstName = Impianto.Responsabile,
+                    .LastName = "",
+                    .Address = Impianto.Indirizzo,
+                    .GseNumber = Impianto.NrPraticaGSE,
+                    .ServiceStartDate = Impianto.DataEntrataInEsercizio,
+                    .City = Impianto.Citta,
+                    .Region = Impianto.Regione,
+                    .Cap = Impianto.Cap,
+                    .Longitude = Impianto.Longitudine,
+                    .Latitude = Impianto.Latitudine,
+                    .ContoEnergia = Trim(Impianto.ContoEnergia),
+                    .Quantity = ListaPannelli.Count,
+                    .ModuleSerialNumbers = serialNumbers
                     }, 28, 50, Marche, Peso, Modelli, serialNumbers)
 
                 Response.AddHeader("Content-Disposition", "attachment; filename=Certificato.pdf")
@@ -147,9 +147,66 @@ Partial Class WebApp_Impianti_ListaImpianti
 
     Protected Sub cmdEsporta_Click(sender As Object, e As EventArgs) Handles cmdEsporta.Click
 
-        Dim dt As DataTable = DirectCast(Me.SqlDatasource1.[Select](DataSourceSelectArguments.Empty), DataView).ToTable()
+        Dim dt As New DataTable
+        Dim ListaImpianti As List(Of Impianto)
 
-        dt.Columns.Remove("id")
+        If ddlCliente.SelectedIndex <> 0 Then
+            ListaImpianti = Impianto.Lista(ddlCliente.SelectedValue)
+        Else
+            ListaImpianti = Impianto.Lista(0)
+        End If
+
+        dt.Columns.Add("Codice")
+        dt.Columns.Add("Descrizione")
+        dt.Columns.Add("Indirizzo")
+        dt.Columns.Add("Cap")
+        dt.Columns.Add("Città")
+        dt.Columns.Add("Provincia")
+        dt.Columns.Add("Regione")
+        dt.Columns.Add("Latitudine")
+        dt.Columns.Add("Longitudine")
+        dt.Columns.Add("Responsabile")
+        dt.Columns.Add("NrPraticaGSE")
+        dt.Columns.Add("ContoEnergia")
+        dt.Columns.Add("DataEntrataInEsercizio")
+        dt.Columns("DataEntrataInEsercizio").DataType = System.Type.GetType("System.DateTime")
+        dt.Columns.Add("NrMatricole")
+        dt.Columns("NrMatricole").DataType = System.Type.GetType("System.Int32")
+        'dt.Columns.Add("NrAttestato")
+        'dt.Columns.Add("DataAttestato")
+        dt.Columns.Add("Produttori")
+        dt.Columns.Add("Protocolli")
+        If Page.User.IsInRole("Amministratore") Then
+            dt.Columns.Add("EuroVersati")
+            dt.Columns("EuroVersati").DataType = System.Type.GetType("System.Decimal")
+        End If
+        dt.Columns.Add("PdfScaricabile")
+        For Each Impianto In ListaImpianti
+            Dim newRow As DataRow = dt.NewRow
+            newRow("Codice") = Impianto.Codice
+            newRow("Descrizione") = Impianto.Descrizione
+            newRow("Indirizzo") = Impianto.Indirizzo
+            newRow("CAP") = Impianto.Cap
+            newRow("Città") = Impianto.Citta
+            newRow("Provincia") = Impianto.Provincia
+            newRow("Regione") = Impianto.Regione
+            newRow("Latitudine") = Impianto.Latitudine
+            newRow("Longitudine") = Impianto.Longitudine
+            newRow("Responsabile") = Impianto.Responsabile
+            newRow("NrPraticaGSE") = Impianto.NrPraticaGSE
+            newRow("ContoEnergia") = Impianto.ContoEnergia
+            newRow("DataEntrataInEsercizio") = Impianto.DataEntrataInEsercizio
+            newRow("NrMatricole") = Impianto.TotaleMatricole
+            'newRow("NrAttestato") = Impianto.NrAttestato
+            'newRow("DataAttestato") = Impianto.DataAttestato
+            newRow("Produttori") = Impianto.ListaProduttori
+            newRow("Protocolli") = Impianto.ListaProtocolli
+            If Page.User.IsInRole("Amministratore") Then
+                newRow("EuroVersati") = Impianto.Valore.ToString("#,0.00")
+            End If
+            newRow("PdfScaricabile") = Impianto.Verifica
+            dt.Rows.Add(newRow)
+        Next
 
         Using pck As New ExcelPackage()
             'Create the worksheet
@@ -159,7 +216,7 @@ Partial Class WebApp_Impianti_ListaImpianti
             ws.Cells("A1").LoadFromDataTable(dt, True)
 
             'Format the header for column 1-3
-            Using rng As ExcelRange = ws.Cells("A1:L1")
+            Using rng As ExcelRange = ws.Cells("A1:r1")
                 rng.Style.Font.Bold = True
                 rng.Style.Fill.PatternType = ExcelFillStyle.Solid
                 'Set Pattern for the background to Solid
@@ -168,10 +225,9 @@ Partial Class WebApp_Impianti_ListaImpianti
                 rng.Style.Font.Color.SetColor(Color.White)
             End Using
 
-            Using rng As ExcelRange = ws.Cells("J1:K1048576")
+            Using rng As ExcelRange = ws.Cells("m1:m1048576")
                 rng.Style.Numberformat.Format = "dd/mm/yy"
             End Using
-
 
             'Write it back to the client
             Response.AddHeader("content-disposition", "attachment;  filename=ListaImpianti.xlsx")
@@ -180,38 +236,6 @@ Partial Class WebApp_Impianti_ListaImpianti
             Response.End()
         End Using
 
-        'Response.ContentType = "application/vnd.ms-excel"
-        'Response.Charset = " "
-        'Response.AddHeader("Content-Disposition", "attachment; filename=ListaImpianti.xls;")
-
-        'Response.Write("<table border=0><tr><td style='font-family:Arial; font-size:10pt;'>Codice" & _
-        '       "</td><td style='font-family:Arial; font-size:10pt;'>Descrizione</td>" & _
-        '       "<td style='font-family:Arial; font-size:10pt;'>Indirizzo</td>" & _
-        '       "<td style='font-family:Arial; font-size:10pt;'>Cap</td>" & _
-        '       "<td style='font-family:Arial; font-size:10pt;'>Città</td>" & _
-        '        "<td style='font-family:Arial; font-size:10pt;'>Provincia</td>" & _
-        '        "<td style='font-family:Arial; font-size:10pt;'>Latitudine</td>" & _
-        '        "<td style='font-family:Arial; font-size:10pt;'>Longitudine</td>" & _
-        '        "<td style='font-family:Arial; font-size:10pt;'>Data entrata in esercizio</td>" & _
-        '        "<td style='font-family:Arial; font-size:10pt;'>Data Creazione</td>" & _
-        '       "</tr>")
-
-        'For Each row As DataRow In dt.Rows
-
-        '    Response.Write("<table border=0><tr><td style='font-family:Arial; font-size:10pt;'>" & row.Item(1) & _
-        '                "</td><td style='font-family:Arial; font-size:10pt;'>" & row.Item(2) & _
-        '                "</td><td style='font-family:Arial; font-size:10pt;'>" & row.Item(3) & _
-        '                "</td><td style='font-family:Arial; font-size:10pt;'>" & row.Item(4) & _
-        '                "</td><td style='font-family:Arial; font-size:10pt;'>" & row.Item(5) & _
-        '                "</td><td style='font-family:Arial; font-size:10pt;'>" & row.Item(6) & _
-        '                "</td><td style='font-family:Arial; font-size:10pt;'>" & row.Item(7) & _
-        '                "</td><td style='font-family:Arial; font-size:10pt;'>" & row.Item(8) & _
-        '                "</td><td style='font-family:Arial; font-size:10pt;'>" & row.Item(9) & _
-        '                "</td></tr>")
-
-        'Next
-
-        'Response.End()
 
 
     End Sub

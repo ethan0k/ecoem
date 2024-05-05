@@ -312,11 +312,17 @@ Partial Class WebApp_Amministrazione_ListaProduttori
             Case "R5PZ"
                 StrSql = "select Distinct Costo FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (12,13,14,15,16)"
             Case "IND2.1"
-                StrSql = "select Distinct Costo FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (76,102)"
+                ' Modifica categorie 2024
+                ' StrSql = "select Distinct Costo FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (76,102)" 
+                StrSql = "select Distinct Costo FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (131,126,102,138)"
             Case "IND2.2"
-                StrSql = "select Distinct Costo FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (103,77)"
+                ' Modifica categorie 2024
+                ' StrSql = "select Distinct Costo FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (103,77)"
+                StrSql = "select Distinct Costo FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (136,137,103,140)"
             Case "IND2.3"
-                StrSql = "select Distinct COUNT(Costo) FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (78,104,105,79,80,106,107,108,109,110,111,112,113,114,115)"
+                ' Modifica categorie 2024
+                ' StrSql = "select Distinct COUNT(Costo) FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (78,104,105,79,80,106,107,108,109,110,111,112,113,114,115)"
+                StrSql = "select Distinct COUNT(Costo) FROM tbl_Categorie_ProduttoreNew c where c.Costo > 0 And c.idproduttore = " & IdProduttore & " and c.IdCategoria IN (106,107,108,109,110,111,112,113,114,115,130,135,142,143,144)"
             Case Else
 
         End Select

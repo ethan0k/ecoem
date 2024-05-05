@@ -84,6 +84,11 @@ Namespace ASPNET.StarterKit.DataAccessLayer
         Public MustOverride Function CaricaImpiantoDaIdCliente(ByVal IdCliente As Integer) As List(Of Impianto)
         Public MustOverride Function EliminaImpianto(ByVal Entity As Impianto) As Boolean
         Public MustOverride Function DisabbinaImpianto(ByVal Entity As Impianto) As Boolean
+        Public MustOverride Function ValoreImpianto(ByVal Entity As Impianto) As Decimal
+        Public MustOverride Function ListaProtocolliImpianto(ByVal Entity As Impianto) As List(Of String)
+        Public MustOverride Function ListaProduttoriImpianto(ByVal Entity As Impianto) As List(Of String)
+        Public MustOverride Function ListaImpianti(ByVal IdCliente As Integer) As List(Of Impianto)
+        Public MustOverride Function TotaleMatricole(ByVal Entity As Impianto) As Integer
 
         'UtentiClienti
         Public MustOverride Function CreaNuovoUtenteCliente(ByVal Entity As UtenteCliente) As Integer
@@ -206,6 +211,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
         Public MustOverride Function CaricaCategoriaProduttoreNew(ByVal IdCategoria As Integer, ByVal IdProduttore As Integer, ByVal Professionale As Boolean) As Categoria_ProduttoreNew
         Public MustOverride Function VerificaCategoriaProduttoreNew(ByVal IdCategoria As Integer) As Boolean
         Public MustOverride Function ListaCategoriaProduttoreNew(ByVal Id As Integer, ByVal Professionale As Boolean) As List(Of Categoria_ProduttoreNew)
+        Public MustOverride Function AggiornaCategorieProduttori(ByVal IdCategoria As Integer, ByVal Disattiva As Integer) As Boolean
 
         'Riga Autocertificazione
         Public MustOverride Function CreaNuovaRigaCertificazione(ByVal Entity As RigaAutocertificazione) As Integer

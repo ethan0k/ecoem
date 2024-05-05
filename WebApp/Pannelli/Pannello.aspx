@@ -87,10 +87,16 @@
                 <asp:TextBox CssClass="medium v-name" ID="txtImpianto" runat="server" readonly="true"/>
             </div>
         </div>
-         <div class="control-group">            
+        <div class="control-group">            
             <label class="control-label">Conforme:</label>
             <div class="controls">
                 <asp:CheckBox runat="server" ID="chkConforme"  CssClass="styled" Enabled="false" />
+            </div>
+        </div>
+        <div class="control-group">            
+            <label class="control-label">Costo matricola</label>
+            <div class="controls">
+                <asp:TextBox runat="server" CssClass="medium v-name" ID="txtCostoMatricola" readonly="true"/>
             </div>
         </div>
          <div class="control-group">            

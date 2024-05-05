@@ -446,16 +446,6 @@ Partial Class WebApp_Pannelli_Upload
             ProtocolloCaricamento = txtProtDaAssegnare.Text
         End If
 
-        ' Crea il nuovo protocollo
-        'Dim NewProtocollo As New Protocollo
-        'NewProtocollo.Protocollo = ProtocolloCaricamento
-        'NewProtocollo.Data = Today
-        'NewProtocollo.UserName = Page.User.Identity.Name.ToString
-        'NewProtocollo.DataAttestato = DefaultValues.GetDateTimeMinValue
-        'NewProtocollo.CostoServizio = CostoServizio
-        'NewProtocollo.IdProduttore = ddlProduttore.SelectedValue
-        'NewProtocollo.Save()
-
         For Each ErroreDaImportare In ListaDaImportare
 
             Dim nuovoPannello As New Pannello
@@ -479,7 +469,7 @@ Partial Class WebApp_Pannelli_Upload
             nuovoPannello.Anno = ErroreDaImportare.AnnoCaricamento
             nuovoPannello.Protocollo = ProtocolloCaricamento
             nuovoPannello.NrComunicazione = UltimoNrComunicazione + 1
-            nuovoPannello.DataConformità = DefaultValues.GetDateTimeMinValue
+            nuovoPannello.DataConformita = DefaultValues.GetDateTimeMinValue
             nuovoPannello.IdTipologiaCella = ErroreDaImportare.IdTipologia
             nuovoPannello.IdFasciaDiPeso = ErroreDaImportare.IdFascia
             nuovoPannello.CostoMatricola = ErroreDaImportare.CostoMatricola

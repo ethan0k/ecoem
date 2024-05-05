@@ -210,7 +210,7 @@ Partial Class WebApp_Pannelli_ListaPannelli
 
             Dim Pannello As Pannello = Pannello.Carica(row.Item(0))
             Pannello.Conforme = True
-            Pannello.DataConformità = Today
+            Pannello.DataConformita = Today
             Pannello.Save()
 
         Next

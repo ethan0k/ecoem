@@ -294,31 +294,48 @@ Partial Class WebApp_Dichiarazioni_VerificaDichiarazioni
 
                     If Produttore.Email = "" Then
                         row("Mail") = "NO"
+                    Else
+
+                        smtp.Host = Opzione.Smtp
+                        smtp.Port = Opzione.Porta
+                        smtp.EnableSsl = Opzione.SSL
+                        smtp.UseDefaultCredentials = False
+                        smtp.Credentials = New NetworkCredential(Opzione.NomeUtente, Opzione.Password)
+                        smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network
+
+                        Dim ListaIndirizzi As String()
+                        ListaIndirizzi = SplittaDestinatari(Produttore.EmailNotifiche)
+
+                        For Each indirizzo In ListaIndirizzi
+                            If IsValidEmailFormat(indirizzo) Then
+
+                                Dim NuovoMessaggio As New MailMessage
+                                Dim MyLog As New Log
+                                Dim Esito As String
+
+                                NuovoMessaggio.From = New MailAddress(Opzione.Mittente, "Gestore")
+                                NuovoMessaggio.To.Add(New MailAddress(indirizzo, ""))
+                                NuovoMessaggio.IsBodyHtml = True
+                                NuovoMessaggio.Subject = Opzione.Oggetto
+                                NuovoMessaggio.Body = Server.HtmlDecode(Opzione.TestoMail)
+                                Try
+                                    smtp.Send(NuovoMessaggio)
+                                    row("Mail") = "Inviata"
+                                    Esito = "riuscito"
+                                Catch ex As Exception
+                                    row("Mail") = ex.Message
+                                    Esito = "fallito - " & ex.Message
+                                End Try
+
+                                MyLog.Data = Today
+                                MyLog.Ora = Now
+                                MyLog.Utente = Page.User.Identity.Name.ToString
+                                MyLog.Origine = "verifica dichiarazioni"
+                                MyLog.Descrizione = Left("Invio mail to " & indirizzo & " " & Esito, 250)
+                                MyLog.Save()
+                            End If
+                        Next
                     End If
-
-                    smtp.Host = Opzione.Smtp
-                    smtp.Port = Opzione.Porta
-                    smtp.EnableSsl = Opzione.SSL
-                    smtp.UseDefaultCredentials = False
-                    smtp.Credentials = New NetworkCredential(Opzione.NomeUtente, Opzione.Password)
-                    smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network
-
-                    Dim NuovoMessaggio As New MailMessage
-
-                    NuovoMessaggio.From = New MailAddress(Opzione.Mittente, "Gestore")
-                    NuovoMessaggio.To.Add(New MailAddress(Produttore.EmailNotifiche, ""))
-                    NuovoMessaggio.IsBodyHtml = True
-                    NuovoMessaggio.Subject = Opzione.Oggetto
-                    NuovoMessaggio.Body = Server.HtmlDecode(Opzione.TestoMail)
-                    Try
-                        smtp.Send(NuovoMessaggio)
-                        row("Mail") = "Inviata"
-
-                    Catch ex As Exception
-                        row("Mail") = ex.Message
-
-                    End Try
-
                     myTable.Rows.Add(row)
                     'Thread.Sleep(10000)
                 End If
@@ -562,4 +579,23 @@ Partial Class WebApp_Dichiarazioni_VerificaDichiarazioni
     Private Sub Listview1_PreRender(sender As Object, e As EventArgs) Handles Listview1.PreRender
         Genera()
     End Sub
+
+    Private Function SplittaDestinatari(ByVal Indirizzo As String) As String()
+
+        Dim ListaIndirizzi As String()
+
+        ListaIndirizzi = Split(Indirizzo, ";")
+
+        Return ListaIndirizzi
+
+    End Function
+
+    Function IsValidEmailFormat(ByVal s As String) As Boolean
+        Try
+            Dim a As New System.Net.Mail.MailAddress(s)
+        Catch
+            Return False
+        End Try
+        Return True
+    End Function
 End Class

@@ -85,6 +85,7 @@ $(document).ready(function () {
                                 <th class="title-th"><asp:LinkButton ID="LinkButton2" CommandName="Sort" CommandArgument="Nome" runat="server" ><asp:Label runat="server" ID="Label2" Text="Nome" ></asp:Label></asp:LinkButton></th>
                                 <th class="title-th"><asp:LinkButton ID="LinkButton3" CommandName="Sort" CommandArgument="TipoDiDato" runat="server" ><asp:Label runat="server" ID="Label3" Text="Tipo di dato" ></asp:Label></asp:LinkButton></th>
                                 <th class="title-th"><asp:LinkButton ID="LinkButton1" CommandName="Sort" CommandArgument="Valore" runat="server" ><asp:Label runat="server" ID="Label5" Text="Valore" ></asp:Label></asp:LinkButton></th>
+                                <th style="text-align:center"><asp:LinkButton ID="LinkButton5" CommandName="Sort" CommandArgument="Disattiva" runat="server" ><asp:Label runat="server" ID="Label6" Text="Disattiva" ></asp:Label></asp:LinkButton></th>
                                 <th class="action-th"><div style="text-align:right;padding-right:20px">Azioni</div></th>
                             </tr>
                         </thead>
@@ -144,6 +145,9 @@ $(document).ready(function () {
                     <td>
                         <asp:Label ID="Label7" runat="server" Text='<%# Eval("Valore")%>' />
                     </td>
+                    <td style="text-align:center">
+                        <asp:CheckBox runat="server" ID="chkDisattiva" Enabled="false" Checked='<%# Eval("Disattiva")%>' /> 
+                    </td>
                     <td>
                         <ul class="button-table-head">
                             <li>
@@ -174,6 +178,9 @@ $(document).ready(function () {
                     </td>
                      <td>
                         <asp:Label ID="Label8" runat="server" Text='<%# Eval("Valore")%>' />
+                    </td>
+                    <td style="text-align:center">
+                        <asp:CheckBox runat="server" ID="chkDisattiva" Enabled="false" Checked='<%# Eval("Disattiva")%>' /> 
                     </td>
                     <td>
                         <ul class="button-table-head">

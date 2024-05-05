@@ -80,10 +80,16 @@
                 <asp:TextBox CssClass="medium v-name" ID="txtCosto" runat="server" />
             </div>
         </div>  
-         <div class="control-group">            
+        <div class="control-group">            
             <label class="control-label">Peso per unità:</label>
             <div class="controls">
                 <asp:TextBox CssClass="medium v-name" ID="txtPesoPerUnita" runat="server" />
+            </div>
+        </div> 
+        <div class="control-group">            
+            <label class="control-label">Disattiva:</label>
+            <div class="controls">
+                <asp:CheckBox runat="server" ID="chkDisattiva"  CssClass="styled"  />
             </div>
         </div> 
         <div class="control-group">            

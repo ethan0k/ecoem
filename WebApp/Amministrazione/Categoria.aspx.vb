@@ -24,7 +24,10 @@ Partial Class WebApp_Amministrazione_Categoria
                 txtRaggruppamento.Text = CurrentCategoria.Raggruppamento
                 txtCosto.Text = CurrentCategoria.Valore
                 txtPesoPerUnita.Text = CurrentCategoria.PesoPerUnita
+                chkDisattiva.Checked = CurrentCategoria.Disattiva
             End If
+
+
 
         End If
 
@@ -48,8 +51,10 @@ Partial Class WebApp_Amministrazione_Categoria
     Protected Sub cmdSalva_Click(sender As Object, e As EventArgs) Handles cmdSalva.Click
 
         Dim nuovoCategoria As CategoriaNew
+        Dim AggiornaCatProduttori As Boolean
 
         divError.Visible = False
+        AggiornaCatProduttori = False
 
         If ddlMacroCategoria.SelectedIndex = 0 Then
             Page.ClientScript.RegisterStartupScript(Me.GetType(), "showModal", "jAlert('Compilare il campo Macrocategoria.'" & ", 'Messaggio errore');", True)
@@ -94,8 +99,10 @@ Partial Class WebApp_Amministrazione_Categoria
             .Valore = CDec(txtCosto.Text)
             .DataModifica = Today
             .PesoPerUnita = txtPesoPerUnita.Text
+            .Disattiva = chkDisattiva.Checked
             Try
                 If .Save Then
+                    Categoria_ProduttoreNew.AggiornaCategorieProduttori(nuovoCategoria.Id, .Disattiva)
                     Response.Redirect("ListaCategorie.aspx")
                 End If
             Catch ex As Exception
@@ -104,4 +111,5 @@ Partial Class WebApp_Amministrazione_Categoria
             End Try
         End With
     End Sub
+
 End Class

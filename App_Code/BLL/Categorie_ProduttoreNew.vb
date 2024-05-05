@@ -13,11 +13,13 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
         Private _Peso As Decimal
         Private _Professionale As Boolean
         Private _ValoreDiForecast As Decimal
+        Private _Disattiva As Boolean
 
         Public Sub New()
         End Sub 'New
 
-        Public Sub New(ByVal Id As Integer, ByVal IdCategoria As Integer, ByVal IdProduttore As Integer, ByVal Costo As Decimal, Peso As Decimal, ByVal Professionale As Boolean, ByVal ValoreDiForecast As Decimal)
+        Public Sub New(ByVal Id As Integer, ByVal IdCategoria As Integer, ByVal IdProduttore As Integer, ByVal Costo As Decimal, Peso As Decimal, ByVal Professionale As Boolean, _
+                         ByVal ValoreDiForecast As Decimal, ByVal Disattiva As Boolean)
 
             Me._Id = Id
             Me._IdCategoria = IdCategoria
@@ -26,6 +28,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
             Me._Peso = Peso
             Me._Professionale = Professionale
             Me._ValoreDiForecast = ValoreDiForecast
+            Me._Disattiva = Disattiva
 
         End Sub
 
@@ -86,6 +89,12 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
             End If
 
             Return DataAccessHelper.GetDataAccess().VerificaCategoriaProduttoreNew(IdCategoria)
+
+        End Function
+        ' Aggiorna tutte le ricorrenze sui produttori del campo disattiva derivante dalla categorie
+        Public Shared Function AggiornaCategorieProduttori(ByVal IdCategoria As Integer, ByVal Disattiva As Boolean) As Boolean
+
+            Return DataAccessHelper.GetDataAccess().AggiornaCategorieProduttori(IdCategoria, Disattiva)
 
         End Function
 
@@ -163,6 +172,15 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
 
         End Property
 
+        Public Property Disattiva() As Boolean
+            Get
+                Return _Disattiva
+            End Get
+            Set(ByVal value As Boolean)
+                _Disattiva = value
+            End Set
+
+        End Property
     End Class
 End Namespace
 

@@ -21,7 +21,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
         Private _Protocollo As String
         Private _NrComunicazione As Integer
         Private _Anno As Integer
-        Private _DataConformità As Date
+        Private _DataConformita As Date
         Private _Dismesso As Boolean
         Private _IdFasciaDiPeso As Integer
         Private _IdTipologiaCella As Integer
@@ -33,9 +33,9 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
         Public Sub New()
         End Sub 'New
 
-        Public Sub New(ByVal Id As Integer, Matricola As String, ByVal Modello As String, Peso As Decimal, DataInizioGaranzia As Date, IdMarca As Integer, Produttore As String, ByVal IdImpianto As Integer, ByVal DataCaricamento As Date, _
-                       ByVal Conforme As Boolean, ByVal Protocollo As String, ByVal NrComunicazione As Integer, ByVal Anno As Integer, ByVal DataConformità As Date, ByVal Dismesso As Boolean, ByVal IdfasciaDiPeso As Integer, _
-					   ByVal IdTipologiaCella As Integer, ByVal CostoMatricola As Decimal, ByVal DataRitiro As Date, ByVal NumeroFIR As String)
+        Public Sub New(ByVal Id As Integer, Matricola As String, ByVal Modello As String, Peso As Decimal, DataInizioGaranzia As Date, IdMarca As Integer, Produttore As String, ByVal IdImpianto As Integer, _
+						ByVal DataCaricamento As Date, ByVal Conforme As Boolean, ByVal Protocollo As String, ByVal NrComunicazione As Integer, ByVal Anno As Integer, ByVal DataConformita As Date, _
+						ByVal Dismesso As Boolean, ByVal IdfasciaDiPeso As Integer, ByVal IdTipologiaCella As Integer, ByVal CostoMatricola As Decimal, ByVal DataRitiro As Date, ByVal NumeroFIR As String)
 
             Me._Id = Id
             Me._Matricola = Matricola
@@ -50,7 +50,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
             Me._Protocollo = Protocollo
             Me._NrComunicazione = NrComunicazione
             Me._Anno = Anno
-            Me._DataConformità = DataConformità
+            Me._DataConformita = DataConformita
             Me._Dismesso = Dismesso
             Me._IdFasciaDiPeso = IdfasciaDiPeso
             Me._IdTipologiaCella = IdTipologiaCella
@@ -300,12 +300,12 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
             End Set
         End Property
 
-        Public Property DataConformità() As Date
+        Public Property DataConformita() As Date
             Get
-                Return _DataConformità
+                Return _DataConformita
             End Get
             Set(ByVal value As Date)
-                _DataConformità = value
+                _DataConformita = value
             End Set
         End Property
 

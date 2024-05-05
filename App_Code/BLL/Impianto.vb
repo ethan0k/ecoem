@@ -13,7 +13,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
         Private _Descrizione As String
         Private _Indirizzo As String
         Private _Cap As String
-        Private _Città As String
+        Private _Citta As String
         Private _Provincia As String
         Private _Latitudine As String
         Private _Longitudine As String
@@ -32,7 +32,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
         Public Sub New()
         End Sub 'New
 
-        Public Sub New(ByVal Id As Integer, Codice As String, Descrizione As String, ByVal Indirizzo As String, Cap As String, Città As String, Provincia As String, Latitudine As String, _
+        Public Sub New(ByVal Id As Integer, Codice As String, Descrizione As String, ByVal Indirizzo As String, Cap As String, Citta As String, Provincia As String, Latitudine As String, _
                         ByVal Longitudine As String, ByVal IdCliente As Integer, ByVal DataCreazione As Date, ByVal Responsabile As String, ByVal NrPraticaGSE As String, ByVal Regione As String, ByVal ContoEnergia As String, _
                         DataEntrataInEsercizio As DateTime, ByVal Attestato As String, ByVal DataAttestato As DateTime, NrAttestato As Integer, _
                        ByVal NomeProduttore As String)
@@ -42,7 +42,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
             Me._Descrizione = Descrizione
             Me._Indirizzo = Indirizzo
             Me._Cap = Cap
-            Me._Città = Città
+            Me._Citta = Citta
             Me._Provincia = Provincia
             Me._Latitudine = Latitudine
             Me._Longitudine = Longitudine
@@ -89,6 +89,57 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
         Public Shared Function TotaleImpianti(IdCliente As Integer) As Integer
 
             Return DataAccessHelper.GetDataAccess().TotaleImpianti(IdCliente)
+
+        End Function
+
+        Public Function Valore() As Decimal ' Restituisce il valore di un impianto
+
+            Return DataAccessHelper.GetDataAccess().ValoreImpianto(Me)
+
+        End Function
+
+        Public Function TotaleMatricole() As Integer ' Restituisce il numero di pannelli associati
+
+            Return DataAccessHelper.GetDataAccess().TotaleMatricole(Me)
+
+        End Function
+        Public Function ListaProtocolli() As String ' Restituisce la lista di protocolli abbinati all'impianto
+
+            Dim ListaOneString As String
+            Dim Lista As List(Of String) = DataAccessHelper.GetDataAccess().ListaProtocolliImpianto(Me)
+
+            If (Lista Is Nothing) Then
+                ListaOneString = ""
+            Else
+                For Each item As String In Lista
+                    ListaOneString += ("," & item)
+                Next
+
+                Return ListaOneString.Substring(1)
+            End If
+
+        End Function
+
+        Public Function ListaProduttori() As String ' Restituisce la lista di produttori abbinati all'impianto
+
+            Dim ListaOneString As String
+            Dim Lista As List(Of String) = DataAccessHelper.GetDataAccess().ListaProduttoriImpianto(Me)
+
+            If (Lista Is Nothing) Then
+                ListaOneString = ""
+            Else
+                For Each item As String In Lista
+                    ListaOneString += ("," & item)
+                Next
+
+                Return ListaOneString.Substring(1)
+            End If
+
+        End Function
+
+        Public Shared Function Lista(ByVal IdCliente As Integer) As List(Of Impianto)
+
+            Return DataAccessHelper.GetDataAccess().ListaImpianti(IdCliente)
 
         End Function
 
@@ -210,18 +261,18 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
 
         End Property
 
-        Public Property Città() As String
+        Public Property Citta() As String
 
             Get
-                If String.IsNullOrEmpty(Me._Città) Then
+                If String.IsNullOrEmpty(Me._Citta) Then
                     Return String.Empty
                 Else
-                    Return Me._Città
+                    Return Me._Citta
                 End If
             End Get
 
             Set(ByVal value As String)
-                Me._Città = value
+                Me._Citta = value
             End Set
 
         End Property

@@ -27,8 +27,9 @@ Partial Class WebApp_Pannelli_Pannello
                 txtDataCaricamento.Text = CurrentPannello.DataCaricamento
                 txtProtocollo.Text = CurrentPannello.Protocollo
                 txtMarca.Text = CurrentPannello.Produttore
-                If CurrentPannello.DataConformità > DefaultValues.GetDateTimeMinValue Then
-                    txtDataConformità.Text = CurrentPannello.DataConformità
+                txtCostoMatricola.Text = CurrentPannello.CostoMatricola.ToString("#,0.00")
+                If CurrentPannello.DataConformita > DefaultValues.GetDateTimeMinValue Then
+                    txtDataConformità.Text = CurrentPannello.DataConformita
                 End If
                 If CurrentPannello.DataRitiro > DefaultValues.GetDateTimeMinValue Then
                     txtDataritiro.Text = CurrentPannello.DataRitiro
@@ -129,8 +130,12 @@ Partial Class WebApp_Pannelli_Pannello
             .Peso = CDec(txtPeso.Text)
             '.Produttore = Left(txtProduttore.Text, 50)
             '.IdImpianto=ddlImpianti.SelectedValue
-            .DataInizioGaranzia = CDate(txtDataInizioGaranzia.Text)
-            .DataRitiro = CDate(txtDataritiro.Text)
+            If IsDate(txtDataInizioGaranzia.Text) Then
+                .DataInizioGaranzia = CDate(txtDataInizioGaranzia.Text)
+            End If
+            If IsDate(txtDataritiro.Text) Then
+                .DataRitiro = CDate(txtDataritiro.Text)
+            End If
             .NumeroFIR = Left(txtNumeroFIR.Text, 30)
             .Protocollo = Left(txtProtocollo.Text, 20)
             '.Conforme = chkConforme.Checked

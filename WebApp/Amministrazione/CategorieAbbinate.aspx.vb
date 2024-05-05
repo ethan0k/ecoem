@@ -42,21 +42,39 @@ Partial Class WebApp_Amministrazione_CategorieAbbinate
         If (e.Item.ItemType = ListViewItemType.DataItem) Then
 
             Dim myCheckBox As CheckBox = CType(e.Item.FindControl("Abbinato"), CheckBox)
+            Dim mychkDisattiva As CheckBox = CType(e.Item.FindControl("chkDisattiva"), CheckBox)
+
             Dim myTextBox As TextBox = CType(e.Item.FindControl("txtCosto"), TextBox)
             Dim myTextBoxPeso As TextBox = CType(e.Item.FindControl("txtPeso"), TextBox)
             Dim myTextBoxValoreForecast As TextBox = CType(e.Item.FindControl("txtValoreForecast"), TextBox)
             Dim dataItem As ListViewDataItem = DirectCast(e.Item, ListViewDataItem)
 
             Dim CatPRO As Categoria_ProduttoreNew = Categoria_ProduttoreNew.Carica(CInt(Listview1.DataKeys(dataItem.DisplayIndex).Value.ToString), CInt(Request.QueryString("Id")), False)
+            Dim Categoria As CategoriaNew = CategoriaNew.Carica(CatPRO.IdCategoria)
             If CatPRO IsNot Nothing Then
-                myCheckBox.Checked = True
-                myTextBox.Enabled = True
-                myTextBoxPeso.Enabled = True
+                If CatPRO.Disattiva Then
+                    myCheckBox.Enabled = False
+                    myTextBox.Enabled = False
+                    myTextBoxPeso.Enabled = False
+                    myTextBoxValoreForecast.Enabled = False
+                Else
+                    myCheckBox.Checked = True
+                    myTextBox.Enabled = True
+                    If Categoria.TipoDiDato = "Quantità" Then
+                        myTextBoxPeso.Enabled = True
+                    Else
+                        myTextBoxPeso.Enabled = False
+                    End If
+                    myTextBoxValoreForecast.Enabled = True
+                End If
+
+                mychkDisattiva.Checked = CatPRO.Disattiva
+
                 myTextBox.Text = String.Format("{0:#,##0.000}", CatPRO.Costo)
                 myTextBoxPeso.Text = String.Format("{0:#,##0.000}", CatPRO.Peso)
                 myTextBoxValoreForecast.Text = String.Format("{0:#,##0.000}", CatPRO.ValoreDiForecast)
             Else
-               
+                mychkDisattiva.Checked = False
                 myCheckBox.Checked = False
                 myTextBox.Text = String.Empty
                 myTextBox.Enabled = False
@@ -78,6 +96,7 @@ Partial Class WebApp_Amministrazione_CategorieAbbinate
         Dim txtPeso As TextBox = CType(Listview1.Items(dataItem.DisplayIndex).FindControl("txtPeso"), TextBox)
         Dim txtValoreForecast As TextBox = CType(Listview1.Items(dataItem.DisplayIndex).FindControl("txtValoreForecast"), TextBox)
         Dim code As String = Listview1.DataKeys(dataItem.DisplayIndex).Value.ToString()
+        Dim CategoriaNew As CategoriaNew = CategoriaNew.Carica(CInt(code))
 
         If cb.Checked Then
             Dim CatPRO As New Categoria_ProduttoreNew

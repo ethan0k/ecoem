@@ -22,6 +22,7 @@
                         <thead>
                             <tr>
                                 <th style="width:1%;text-align:center"><asp:Label runat="server" ID="Label3" Text="Abbinato" ></asp:Label></th>                            
+                                <th style="width:1%;text-align:center"><asp:Label runat="server" ID="Label8" Text="Disattivo" ></asp:Label></th>                            
                                 <th class="title-th"><asp:LinkButton ID="LinkButton2" CommandName="Sort" CommandArgument="Nome" runat="server" ><asp:Label runat="server" ID="Label2" Text="Nome" ></asp:Label></asp:LinkButton></th>                                
                                 <th class="title-th"><asp:LinkButton ID="LinkButton1" CommandName="Sort" CommandArgument="Costo" runat="server" ><asp:Label runat="server" ID="Label5" Text="Costo" ></asp:Label></asp:LinkButton></th>                                
                                 <th class="title-th"><asp:LinkButton ID="LinkButton3" CommandName="Sort" CommandArgument="Peso" runat="server" ><asp:Label runat="server" ID="Label6" Text="Peso" ></asp:Label></asp:LinkButton></th>                                
@@ -77,7 +78,10 @@
                 <tr class="gray-tr"> 
                     <td style="text-align:center">
                         <asp:CheckBox runat="server" ID="Abbinato" oncheckedchanged="CheckBox1_CheckedChanged" AutoPostBack="true"/>
-                    </td>               
+                    </td>   
+                    <td style="text-align:center">
+                        <asp:CheckBox runat="server" ID="chkDisattiva" Enabled="false" /> 
+                    </td>
                     <td>
                         <asp:Label ID="Label4" runat="server" Text='<%# Eval("Nome") %>' />
                     </td>      
@@ -90,13 +94,17 @@
                     <td>
                         <asp:textbox runat="server" ID="txtValoreForecast" CssClass="numeric"  style="text-align:right" OnTextChanged="txtValoreForecast_Changed" AutoPostBack="true"></asp:textbox> 
                     </td> 
+                    
                 </tr>
             </ItemTemplate>
             <AlternatingItemTemplate>
                 <tr>
                      <td style="text-align:center">
                         <asp:CheckBox runat="server" ID="Abbinato" oncheckedchanged="CheckBox1_CheckedChanged" AutoPostBack="true"/>
-                    </td>            
+                    </td>  
+                    <td style="text-align:center">
+                        <asp:CheckBox runat="server" ID="chkDisattiva" Enabled="false"/> 
+                    </td>
                     <td>
                         <asp:Label ID="titleLabel" runat="server" Text='<%# Eval("Nome")%>' />
                     </td>    
@@ -108,7 +116,7 @@
                     </td>   
                      <td>
                         <asp:textbox runat="server" ID="txtValoreForecast" CssClass="numeric"  style="text-align:right" OnTextChanged="txtValoreForecast_Changed" AutoPostBack="true"></asp:textbox> 
-                    </td>
+                    </td>                    
                 </tr>
             </AlternatingItemTemplate>
         </asp:ListView>

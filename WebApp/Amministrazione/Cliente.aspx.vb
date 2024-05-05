@@ -33,7 +33,7 @@ Partial Class WebApp_Amministrazione_Cliente
                 txtCap.Text = CurrentCliente.Cap
                 txtContatto.Text = CurrentCliente.Contatto
                 txtProvincia.Text = CurrentCliente.Provincia
-                txtCittà.Text = CurrentCliente.Città
+                txtCittà.Text = CurrentCliente.Citta
                 txtFax.Text = CurrentCliente.Fax
                 txtEmail.Text = CurrentCliente.Email
                 txtCognome.Text = CurrentCliente.Cognome
@@ -99,7 +99,7 @@ Partial Class WebApp_Amministrazione_Cliente
             .RagioneSociale = Left(txtRagioneSociale.Text, 50)
             .Indirizzo = Left(txtIndirizzo.Text, 50)
             .Cap = Left(txtCap.Text, 10)
-            .Città = Left(txtCittà.Text, 50)
+            .Citta = Left(txtCittà.Text, 50)
             .Provincia = Left(txtProvincia.Text, 50)
             .Telefono = Left(txtTelefono.Text, 15)
             .Fax = Left(txtFax.Text, 15)

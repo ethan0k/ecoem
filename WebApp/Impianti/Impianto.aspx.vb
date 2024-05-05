@@ -29,7 +29,7 @@ Partial Class WebApp_Impianti_Impianto
                         Response.Redirect("ListaImpianti.aspx")
                         Exit Sub
                     End If
-                    
+
                     ddlCliente.Visible = False
                     lblCliente.Visible = False
                     cmdSalva.Visible = False
@@ -45,10 +45,10 @@ Partial Class WebApp_Impianti_Impianto
                     ddlRegione.Enabled = False
                     txtNrPraticaGSE.ReadOnly = True
                     ddlContoEnergia.Enabled = False
-
+                    groupCosto.Visible = False
                 End If
 
-            ElseIf Page.User.IsInRole("MOnitor") Then
+            ElseIf Page.User.IsInRole("Monitor") Then
 
                 ddlCliente.Visible = False
                 lblCliente.Visible = False
@@ -64,9 +64,11 @@ Partial Class WebApp_Impianti_Impianto
                 ddlRegione.Enabled = False
                 txtNrPraticaGSE.ReadOnly = True
                 ddlContoEnergia.Enabled = False
+                groupCosto.Visible = False
             ElseIf Page.User.IsInRole("Amministratore") then
                 divNomeProd.Visible=True
-                cmdDisabbina.Visible =True
+                cmdDisabbina.Visible = True
+                groupCosto.Visible = True
             End If
 
             If Not CurrentImpianto Is Nothing Then
@@ -74,7 +76,7 @@ Partial Class WebApp_Impianti_Impianto
                 txtDescrizione.Text = CurrentImpianto.Descrizione
                 txtIndirizzo.Text = CurrentImpianto.Indirizzo
                 txtCap.Text = CurrentImpianto.Cap
-                txtCittà.Text = CurrentImpianto.Città
+                txtCittà.Text = CurrentImpianto.Citta
                 ddlProvincia.SelectedValue = CurrentImpianto.Provincia
                 txtLatitudine.Text = CurrentImpianto.Latitudine
                 txtLongitudine.Text = CurrentImpianto.Longitudine
@@ -84,6 +86,8 @@ Partial Class WebApp_Impianti_Impianto
                 txtNrPraticaGSE.Text = CurrentImpianto.NrPraticaGSE
                 ddlContoEnergia.SelectedValue = Trim(CurrentImpianto.ContoEnergia)
                 txtNomeProduttore.Text = CurrentImpianto.NomeProduttore
+                txtCosto.Text = Format(CurrentImpianto.Valore, "0.00")
+
             End If
 
         End If
@@ -147,7 +151,7 @@ Partial Class WebApp_Impianti_Impianto
             .Descrizione = Left(txtDescrizione.Text, 50)
             .Indirizzo = Left(txtIndirizzo.Text, 50)
             .Cap = Left(txtCap.Text, 5)
-            .Città = Left(txtCittà.Text, 50)
+            .Citta = Left(txtCittà.Text, 50)
             .Provincia = ddlProvincia.SelectedValue
             .Latitudine = UCase(Left(txtLatitudine.Text, 20))
             .Longitudine = UCase(Left(txtLongitudine.Text, 20))

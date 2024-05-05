@@ -16,13 +16,14 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
         Private _Raggruppamento As String
         Private _DataModifica As DateTime
         Private _PesoPerUnita As Decimal
+        Private _Disattiva As Boolean
 
         Public Sub New()
         End Sub 'New
 
         Public Sub New(ByVal Id As Integer, ByVal Nome As String, ByVal TipoDiDato As String, ByVal Valore As Decimal, _
                        ByVal IdMacroCategoria As Integer, ByVal Codifica As String, ByVal Raggruppamento As String, _
-                       ByVal DataModifica As DateTime, ByVal PesoPerUnita As Decimal)
+                       ByVal DataModifica As DateTime, ByVal PesoPerUnita As Decimal, ByVal Disattiva as Boolean)
 
             Me._Id = Id
             Me._Nome = Nome
@@ -33,6 +34,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
             Me._Raggruppamento = Raggruppamento
             Me._DataModifica = DataModifica
             Me._PesoPerUnita = PesoPerUnita
+            me._Disattiva = Disattiva
 
         End Sub
 
@@ -198,6 +200,16 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
             End Get
             Set(ByVal value As Decimal)
                 _PesoPerUnita = value
+            End Set
+
+        End Property
+
+         Public Property Disattiva() As Boolean
+            Get
+                Return _Disattiva
+            End Get
+            Set(ByVal value As Boolean)
+                _Disattiva = value
             End Set
 
         End Property

@@ -12,7 +12,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
         Private _RagioneSociale As String
         Private _Indirizzo As String
         Private _Cap As String
-        Private _Città As String
+        Private _Citta As String
         Private _Provincia As String
         Private _Email As String
         Private _Telefono As String
@@ -31,7 +31,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
         End Sub 'New
 
         Public Sub New(ByVal IdCliente As Integer, ByVal RagioneSociale As String, ByVal Indirizzo As String, ByVal Cap As String, _
-                       ByVal Città As String, ByVal Provincia As String, ByVal Email As String, ByVal Telefono As String, _
+                       ByVal Citta As String, ByVal Provincia As String, ByVal Email As String, ByVal Telefono As String, _
                        ByVal Fax As String, ByVal PartitaIva As String, ByVal Contatto As String, ByVal Cognome As String, _
                        ByVal Nome As String, ByVal CodiceFiscale As String, ByVal _Periodicita As Integer, ByVal Attivo As Boolean, _
                        ByVal Note As String)
@@ -40,7 +40,7 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
             Me._RagioneSociale = RagioneSociale
             Me._Indirizzo = Indirizzo
             Me._Cap = Cap
-            Me._Città = Città
+            Me._Citta = Citta
             Me._Provincia = Provincia
             Me._Email = Email
             Me._Telefono = Telefono
@@ -150,18 +150,18 @@ Namespace ASPNET.StarterKit.BusinessLogicLayer
 
         End Property
 
-        Public Property Città() As String
+        Public Property Citta() As String
 
             Get
-                If String.IsNullOrEmpty(Me._Città) Then
+                If String.IsNullOrEmpty(Me._Citta) Then
                     Return String.Empty
                 Else
-                    Return Me._Città
+                    Return Me._Citta
                 End If
             End Get
 
             Set(ByVal value As String)
-                Me._Città = value
+                Me._Citta = value
             End Set
 
         End Property

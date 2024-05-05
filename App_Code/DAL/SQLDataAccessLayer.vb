@@ -466,11 +466,11 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@Protocollo", SqlDbType.NVarChar, 256, ParameterDirection.Input, nuovoPannello.Protocollo)
             AddParamToSQLCmd(sqlCmd, "@NrComunicazione", SqlDbType.Int, 0, ParameterDirection.Input, nuovoPannello.NrComunicazione)
             AddParamToSQLCmd(sqlCmd, "@Anno", SqlDbType.Int, 0, ParameterDirection.Input, nuovoPannello.Anno)
-            AddParamToSQLCmd(sqlCmd, "@DataConformita", SqlDbType.DateTime, 0, ParameterDirection.Input, nuovoPannello.DataConformità)
+            AddParamToSQLCmd(sqlCmd, "@DataConformita", SqlDbType.DateTime, 0, ParameterDirection.Input, nuovoPannello.DataConformita)
             AddParamToSQLCmd(sqlCmd, "@Dismesso", SqlDbType.Bit, 0, ParameterDirection.Input, nuovoPannello.Dismesso)
             AddParamToSQLCmd(sqlCmd, "@IdFasciaDiPeso", SqlDbType.Int, 0, ParameterDirection.Input, nuovoPannello.IdFasciaDiPeso)
             AddParamToSQLCmd(sqlCmd, "@IdTipologiaCella", SqlDbType.Int, 0, ParameterDirection.Input, nuovoPannello.IdTipologiaCella)
-            AddParamToSQLCmd(sqlCmd, "@CostoMatricola", SqlDbType.Decimal, 0, ParameterDirection.Input, nuovoPannello.CostoMatricola)
+            AddParamToSQLCmd(sqlCmd, "@CostoMatricola", SqlDbType.Money, 0, ParameterDirection.Input, nuovoPannello.CostoMatricola)
             AddParamToSQLCmd(sqlCmd, "@DataRitiro", SqlDbType.DateTime, 0, ParameterDirection.Input, nuovoPannello.DataRitiro)
             AddParamToSQLCmd(sqlCmd, "@NumeroFIR", SqlDbType.Text, 255, ParameterDirection.Input, nuovoPannello.NumeroFIR)
 
@@ -542,11 +542,11 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@Protocollo", SqlDbType.NVarChar, 256, ParameterDirection.Input, pannelloDaAggiornare.Protocollo)
             AddParamToSQLCmd(sqlCmd, "@NrComunicazione", SqlDbType.Int, 0, ParameterDirection.Input, pannelloDaAggiornare.NrComunicazione)
             AddParamToSQLCmd(sqlCmd, "@Anno", SqlDbType.Int, 0, ParameterDirection.Input, pannelloDaAggiornare.Anno)
-            AddParamToSQLCmd(sqlCmd, "@DataConformita", SqlDbType.DateTime, 0, ParameterDirection.Input, pannelloDaAggiornare.DataConformità)
+            AddParamToSQLCmd(sqlCmd, "@DataConformita", SqlDbType.DateTime, 0, ParameterDirection.Input, pannelloDaAggiornare.DataConformita)
             AddParamToSQLCmd(sqlCmd, "@Dismesso", SqlDbType.Bit, 0, ParameterDirection.Input, pannelloDaAggiornare.Dismesso)
             AddParamToSQLCmd(sqlCmd, "@IdFasciaDiPeso", SqlDbType.Int, 0, ParameterDirection.Input, pannelloDaAggiornare.IdFasciaDiPeso)
             AddParamToSQLCmd(sqlCmd, "@IdTipologiaCella", SqlDbType.Int, 0, ParameterDirection.Input, pannelloDaAggiornare.IdTipologiaCella)
-            AddParamToSQLCmd(sqlCmd, "@CostoMatricola", SqlDbType.Decimal, 0, ParameterDirection.Input, pannelloDaAggiornare.CostoMatricola)
+            AddParamToSQLCmd(sqlCmd, "@CostoMatricola", SqlDbType.Money, 0, ParameterDirection.Input, pannelloDaAggiornare.CostoMatricola)
             AddParamToSQLCmd(sqlCmd, "@DataRitiro", SqlDbType.DateTime, 0, ParameterDirection.Input, pannelloDaAggiornare.DataRitiro)
             AddParamToSQLCmd(sqlCmd, "@NumeroFIR", SqlDbType.Text, 255, ParameterDirection.Input, pannelloDaAggiornare.NumeroFIR)
 
@@ -755,7 +755,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@RagioneSociale", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoCliente.RagioneSociale)
             AddParamToSQLCmd(sqlCmd, "@Indirizzo", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoCliente.Indirizzo)
             AddParamToSQLCmd(sqlCmd, "@Cap", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoCliente.Cap)
-            AddParamToSQLCmd(sqlCmd, "@Città", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoCliente.Città)
+            AddParamToSQLCmd(sqlCmd, "@Citta", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoCliente.Citta)
             AddParamToSQLCmd(sqlCmd, "@Provincia", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoCliente.Provincia)
             AddParamToSQLCmd(sqlCmd, "@Telefono", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoCliente.Telefono)
             AddParamToSQLCmd(sqlCmd, "@Fax", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoCliente.Fax)
@@ -783,7 +783,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
 
             Dim sqlCmd As SqlCommand = New SqlCommand()
             AddParamToSQLCmd(sqlCmd, "@IdCliente", SqlDbType.Int, 0, ParameterDirection.Input, IdCliente)
-            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_CLIENTE_CARICADa)
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_CLIENTE_CARICADA)
 
             Dim ClienteList As New List(Of Cliente)()
             TExecuteReaderCmd(Of Cliente)(sqlCmd, AddressOf TGenerateClienteListFromReader(Of Cliente), ClienteList)
@@ -811,7 +811,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@RagioneSociale", SqlDbType.NVarChar, 255, ParameterDirection.Input, ClienteDaAggiornare.RagioneSociale)
             AddParamToSQLCmd(sqlCmd, "@Indirizzo", SqlDbType.NVarChar, 255, ParameterDirection.Input, ClienteDaAggiornare.Indirizzo)
             AddParamToSQLCmd(sqlCmd, "@Cap", SqlDbType.NVarChar, 255, ParameterDirection.Input, ClienteDaAggiornare.Cap)
-            AddParamToSQLCmd(sqlCmd, "@Città", SqlDbType.NVarChar, 255, ParameterDirection.Input, ClienteDaAggiornare.Città)
+            AddParamToSQLCmd(sqlCmd, "@Citta", SqlDbType.NVarChar, 255, ParameterDirection.Input, ClienteDaAggiornare.Citta)
             AddParamToSQLCmd(sqlCmd, "@Provincia", SqlDbType.NVarChar, 255, ParameterDirection.Input, ClienteDaAggiornare.Provincia)
             AddParamToSQLCmd(sqlCmd, "@Email", SqlDbType.NVarChar, 255, ParameterDirection.Input, ClienteDaAggiornare.Email)
             AddParamToSQLCmd(sqlCmd, "@Telefono", SqlDbType.NVarChar, 255, ParameterDirection.Input, ClienteDaAggiornare.Telefono)
@@ -889,6 +889,10 @@ Namespace ASPNET.StarterKit.DataAccessLayer
         Private Const SP_IMPIANTO_CARICADAIDCLIENTE As String = "sp_Impianto_CaricaDaIdCliente"
         Private Const SP_IMPIANTO_ELIMINA As String = "sp_Impianto_Elimina"
         Private Const SP_IMPIANTO_DISABBINA As String = "sp_Impianto_Disabbina"
+        Private Const SP_IMPIANTO_VALORE As String = "sp_Impianto_Valore"
+        Private Const SP_IMPIANTO_LISTAPROTOCOLLI As String = "sp_Impianto_ListaProtocolli"
+        Private Const SP_IMPIANTO_LISTAPRODUTTORI As String = "sp_Impianto_ListaProduttori"
+        Private Const SP_IMPIANTO_TOTALEMATRICOLE As String = "sp_Impianto_TotaleMatricole"
 
         Public Overrides Function CreaNuovoImpianto(ByVal nuovoImpianto As Impianto) As Integer
 
@@ -902,7 +906,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@Descrizione", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoImpianto.Descrizione)
             AddParamToSQLCmd(sqlCmd, "@Indirizzo", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoImpianto.Indirizzo)
             AddParamToSQLCmd(sqlCmd, "@Cap", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoImpianto.Cap)
-            AddParamToSQLCmd(sqlCmd, "@Città", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoImpianto.Città)
+            AddParamToSQLCmd(sqlCmd, "@Citta", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoImpianto.Citta)
             AddParamToSQLCmd(sqlCmd, "@Provincia", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoImpianto.Provincia)
             AddParamToSQLCmd(sqlCmd, "@Latitudine", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoImpianto.Latitudine)
             AddParamToSQLCmd(sqlCmd, "@Longitudine", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovoImpianto.Longitudine)
@@ -962,7 +966,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@Descrizione", SqlDbType.NVarChar, 255, ParameterDirection.Input, impiantoDaAggiornare.Descrizione)
             AddParamToSQLCmd(sqlCmd, "@Indirizzo", SqlDbType.NVarChar, 255, ParameterDirection.Input, impiantoDaAggiornare.Indirizzo)
             AddParamToSQLCmd(sqlCmd, "@Cap", SqlDbType.NVarChar, 255, ParameterDirection.Input, impiantoDaAggiornare.Cap)
-            AddParamToSQLCmd(sqlCmd, "@Città", SqlDbType.NVarChar, 255, ParameterDirection.Input, impiantoDaAggiornare.Città)
+            AddParamToSQLCmd(sqlCmd, "@Citta", SqlDbType.NVarChar, 255, ParameterDirection.Input, impiantoDaAggiornare.Citta)
             AddParamToSQLCmd(sqlCmd, "@Provincia", SqlDbType.NVarChar, 255, ParameterDirection.Input, impiantoDaAggiornare.Provincia)
             AddParamToSQLCmd(sqlCmd, "@Latitudine", SqlDbType.NVarChar, 255, ParameterDirection.Input, impiantoDaAggiornare.Latitudine)
             AddParamToSQLCmd(sqlCmd, "@Longitudine", SqlDbType.NVarChar, 255, ParameterDirection.Input, impiantoDaAggiornare.Longitudine)
@@ -1125,6 +1129,105 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             Return True
 
         End Function
+
+        Public Overrides Function ValoreImpianto(ByVal impianto As Impianto) As Decimal
+
+            Dim sqlCmd As SqlCommand = New SqlCommand()
+            Dim Valore As Object
+
+            AddParamToSQLCmd(sqlCmd, "@IdImpianto", SqlDbType.Int, 0, ParameterDirection.Input, impianto.Id)
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, "sp_Impianto_Valore")
+
+            Valore = ExecuteScalarCmd2(sqlCmd)
+
+            If Valore Is DBNull.Value Then
+                Return 0
+            Else
+                Return CDec(Valore)
+            End If
+
+        End Function
+
+        Public Overrides Function TotaleMatricole(ByVal impianto As Impianto) As Integer
+
+            Dim sqlCmd As SqlCommand = New SqlCommand()
+            Dim Valore As Object
+
+            AddParamToSQLCmd(sqlCmd, "@IdImpianto", SqlDbType.Int, 0, ParameterDirection.Input, impianto.Id)
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, "sp_Impianto_TotaleMatricole")
+
+            Valore = ExecuteScalarCmd2(sqlCmd)
+
+            If Valore Is DBNull.Value Then
+                Return 0
+            Else
+                Return CInt(Valore)
+            End If
+
+        End Function
+
+        Public Overrides Function ListaProtocolliImpianto(ByVal impianto As Impianto) As List(Of String)
+
+            If impianto Is Nothing Then
+                Throw New ArgumentNullException("Impianto")
+            End If
+
+            Dim sqlCmd As SqlCommand = New SqlCommand()
+
+            AddParamToSQLCmd(sqlCmd, "@IdImpianto", SqlDbType.Int, 0, ParameterDirection.Input, impianto.Id)
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_IMPIANTO_LISTAPROTOCOLLI)
+
+            Dim ListaProtocolli As New List(Of String)()
+            TExecuteReaderCmd(Of String)(sqlCmd, AddressOf TGenerateListOfProtocolliFromReader(Of String), ListaProtocolli)
+
+            If ListaProtocolli.Count > 0 Then
+                Return ListaProtocolli
+            Else
+                Return Nothing
+            End If
+
+        End Function
+
+        Public Overrides Function ListaProduttoriImpianto(ByVal impianto As Impianto) As List(Of String)
+
+            If impianto Is Nothing Then
+                Throw New ArgumentNullException("Impianto")
+            End If
+
+            Dim sqlCmd As SqlCommand = New SqlCommand()
+
+            AddParamToSQLCmd(sqlCmd, "@IdImpianto", SqlDbType.Int, 0, ParameterDirection.Input, impianto.Id)
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_IMPIANTO_LISTAPRODUTTORI)
+
+            Dim ListaProduttori As New List(Of String)()
+            TExecuteReaderCmd(Of String)(sqlCmd, AddressOf TGenerateListOfProduttoriFromReader(Of String), ListaProduttori)
+
+            If ListaProduttori.Count > 0 Then
+                Return ListaProduttori
+            Else
+                Return Nothing
+            End If
+
+        End Function
+
+        Public Overrides Function ListaImpianti(ByVal IdCliente As Integer) As List(Of Impianto)
+
+            Dim sqlCmd As SqlCommand = New SqlCommand()
+            AddParamToSQLCmd(sqlCmd, "@IdCliente", SqlDbType.Int, 0, ParameterDirection.Input, IdCliente)
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_IMPIANTO_CARICADAIDCLIENTE)
+
+            Dim impiantoList As New List(Of Impianto)()
+
+            TExecuteReaderCmd(Of Impianto)(sqlCmd, AddressOf TGenerateImpiantoListFromReader(Of Impianto), impiantoList)
+
+            If impiantoList.Count > 0 Then
+                Return impiantoList
+            Else
+                Return Nothing
+            End If
+
+        End Function
+
 
         ' UTENTECLIENTE
         Private Const SP_UTENTECLIENTE_CREA As String = "sp_UtenteCliente_Crea"
@@ -3022,6 +3125,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
         Private Const SP_CATEGORIAPRONEW_CARICA2 As String = "sp_CategoriaProduttoreNew_Carica2"
         Private Const SP_CATEGORIAPRONEW_VERIFICA As String = "sp_CategoriaProduttoreNew_Verifica"
         Private Const SP_CATEGORIAPRONEW_LISTA As String = "sp_CategoriaProduttoreNew_Lista"
+        Private Const SP_CATEGORIAPRONEW_AGGIORNADISATTIVA As String = "sp_CategoriaProduttoreNew_AggiornaDisattiva"
 
         Public Overrides Function CreanuovaCategoriaProduttoreNew(ByVal nuovaCategoriaPro As Categoria_ProduttoreNew) As Integer
 
@@ -3037,6 +3141,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@Peso", SqlDbType.Decimal, 0, ParameterDirection.Input, nuovaCategoriaPro.Peso)
             AddParamToSQLCmd(sqlCmd, "@Professionale", SqlDbType.Bit, 0, ParameterDirection.Input, nuovaCategoriaPro.Professionale)
             AddParamToSQLCmd(sqlCmd, "@ValoreDiForecast", SqlDbType.Decimal, 0, ParameterDirection.Input, nuovaCategoriaPro.ValoreDiForecast)
+            AddParamToSQLCmd(sqlCmd, "@Disattiva", SqlDbType.Bit, 0, ParameterDirection.Input, nuovaCategoriaPro.Disattiva)
 
             SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_CATEGORIAPRONEW_CREA)
             ExecuteScalarCmd(sqlCmd)
@@ -3075,6 +3180,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@Peso", SqlDbType.Decimal, 0, ParameterDirection.Input, categoriaProDaAggiornare.Peso)
             AddParamToSQLCmd(sqlCmd, "@Professionale", SqlDbType.Bit, 0, ParameterDirection.Input, categoriaProDaAggiornare.Professionale)
             AddParamToSQLCmd(sqlCmd, "@ValoreDiForecast", SqlDbType.Decimal, 0, ParameterDirection.Input, categoriaProDaAggiornare.ValoreDiForecast)
+            AddParamToSQLCmd(sqlCmd, "@Disattiva", SqlDbType.Bit, 0, ParameterDirection.Input, categoriaProDaAggiornare.Disattiva)
 
             AddParamToSQLCmd(sqlCmd, "@Id", SqlDbType.Int, 0, ParameterDirection.Input, categoriaProDaAggiornare.Id)
 
@@ -3157,6 +3263,19 @@ Namespace ASPNET.StarterKit.DataAccessLayer
 
         End Function
 
+        Public Overrides Function AggiornaCategorieProduttori(ByVal IdCategoria As Integer, ByVal Disattiva As Integer) As Boolean
+
+            Dim sqlCmd As SqlCommand = New SqlCommand()
+            AddParamToSQLCmd(sqlCmd, "@IdCategoria", SqlDbType.Int, 0, ParameterDirection.Input, IdCategoria)
+            AddParamToSQLCmd(sqlCmd, "@Disattiva", SqlDbType.Bit, 0, ParameterDirection.Input, Disattiva)
+            SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_CATEGORIAPRONEW_AGGIORNADISATTIVA)
+
+            ExecuteScalarCmd(sqlCmd)
+            Return True
+
+
+        End Function
+
         ' CATEGORIA
         Private Const SP_CATEGORIANEW_CREA As String = "sp_CategoriaNew_Crea"
         Private Const SP_CATEGORIANEW_CARICA As String = "sp_CategoriaNew_Carica"
@@ -3180,6 +3299,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@Raggruppamento", SqlDbType.NVarChar, 255, ParameterDirection.Input, nuovaCategoria.Raggruppamento)
             AddParamToSQLCmd(sqlCmd, "@DataModifica", SqlDbType.DateTime, 0, ParameterDirection.Input, nuovaCategoria.DataModifica)
             AddParamToSQLCmd(sqlCmd, "@PesoPerUnita", SqlDbType.Decimal, 0, ParameterDirection.Input, nuovaCategoria.PesoPerUnita)
+            AddParamToSQLCmd(sqlCmd, "@Disattiva", SqlDbType.Bit, 0, ParameterDirection.Input, nuovaCategoria.Disattiva)
 
             SetCommandType(sqlCmd, CommandType.StoredProcedure, SP_CATEGORIANEW_CREA)
             ExecuteScalarCmd(sqlCmd)
@@ -3220,6 +3340,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             AddParamToSQLCmd(sqlCmd, "@Raggruppamento", SqlDbType.NVarChar, 255, ParameterDirection.Input, categoriaDaAggiornare.Raggruppamento)
             AddParamToSQLCmd(sqlCmd, "@DataModifica", SqlDbType.DateTime, 0, ParameterDirection.Input, categoriaDaAggiornare.DataModifica)
             AddParamToSQLCmd(sqlCmd, "@PesoPerUnita", SqlDbType.Decimal, 0, ParameterDirection.Input, categoriaDaAggiornare.PesoPerUnita)
+            AddParamToSQLCmd(sqlCmd, "@Disattiva", SqlDbType.Bit, 0, ParameterDirection.Input, categoriaDaAggiornare.Disattiva)
 
             AddParamToSQLCmd(sqlCmd, "@Id", SqlDbType.Int, 0, ParameterDirection.Input, categoriaDaAggiornare.Id)
 
@@ -3998,20 +4119,20 @@ Namespace ASPNET.StarterKit.DataAccessLayer
 
             Do While returnData.Read()
 
-                Dim DataConformità As Object
+                Dim DataConformita As Object
                 Dim Dismesso As Boolean
                 Dim IdfasciaDiPeso As Integer
                 Dim IdTipologiaCella As Integer
                 Dim CostoMatricola As Decimal
                 Dim DataRitiro As Object
 
-                DataConformità = returnData("DataConformita")
+                DataConformita = returnData("DataConformita")
                 DataRitiro = returnData("DataRitiro")
 
                 If returnData("DataConformita") Is DBNull.Value Then
-                    DataConformità = DefaultValues.GetDateTimeMinValue
+                    DataConformita = DefaultValues.GetDateTimeMinValue
                 Else
-                    DataConformità = CDate(returnData("DataConformita"))
+                    DataConformita = CDate(returnData("DataConformita"))
                 End If
 
                 If returnData("Dismesso") Is DBNull.Value Then
@@ -4047,7 +4168,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
                 Dim Pannello As Pannello = New Pannello(CInt(returnData("Id")), CStr(returnData("Matricola")).ToString, "" + CStr("" + returnData("Modello")).ToString, CDec(returnData("Peso")), _
                                                         CDate(returnData("DataInizioGaranzia")), CInt(returnData("IdMarca")), CStr("" + returnData("Produttore")).ToString, CInt(returnData("IdImpianto")), _
                                                         CDate(returnData("DataCaricamento")), CBool(returnData("Conforme")), CStr("" + returnData("Protocollo")).ToString, CInt(returnData("NrComunicazione")), _
-                                                        CInt(returnData("Anno")), DataConformità, Dismesso, IdfasciaDiPeso, IdTipologiaCella,CostoMatricola, DataRitiro, CStr("" + returnData("NumeroFIR")).ToString)
+                                                        CInt(returnData("Anno")), DataConformita, Dismesso, IdfasciaDiPeso, IdTipologiaCella, CostoMatricola, DataRitiro, CStr("" + returnData("NumeroFIR")).ToString)
                 pannelloList.Add(Pannello)
 
             Loop
@@ -4073,7 +4194,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
                     Attivo = returnData("Attivo")
                 End If
 
-                Dim Cliente As Cliente = New Cliente(CInt(returnData("IdCliente")), CStr("" + returnData("RagioneSociale")), CStr("" + returnData("Indirizzo")), CStr("" + returnData("Cap")), CStr("" + returnData("Città")), CStr("" + returnData("Provincia")), CStr("" + returnData("Email")), CStr("" + returnData("Telefono")), CStr("" + returnData("Fax")), CStr("" + returnData("PartitaIva")), CStr("" + returnData("Contatto")), _
+                Dim Cliente As Cliente = New Cliente(CInt(returnData("IdCliente")), CStr("" + returnData("RagioneSociale")), CStr("" + returnData("Indirizzo")), CStr("" + returnData("Cap")), CStr("" + returnData("Citta")), CStr("" + returnData("Provincia")), CStr("" + returnData("Email")), CStr("" + returnData("Telefono")), CStr("" + returnData("Fax")), CStr("" + returnData("PartitaIva")), CStr("" + returnData("Contatto")), _
                                                      CStr("" + returnData("Cognome")), CStr("" + returnData("Nome")), CStr("" + returnData("CodiceFiscale")), Periodicita, Attivo, CStr("" + returnData("Note")))
                 clienteList.Add(Cliente)
 
@@ -4086,7 +4207,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             Do While returnData.Read()
 
 
-                Dim Impianto As Impianto = New Impianto(CInt(returnData("Id")), CStr("" + returnData("Codice")), CStr("" + returnData("Descrizione")), CStr("" + returnData("Indirizzo")), CStr("" + returnData("Cap")), CStr("" + returnData("Città")), _
+                Dim Impianto As Impianto = New Impianto(CInt(returnData("Id")), CStr("" + returnData("Codice")), CStr("" + returnData("Descrizione")), CStr("" + returnData("Indirizzo")), CStr("" + returnData("Cap")), CStr("" + returnData("Citta")), _
                                                 CStr("" + returnData("Provincia")), CStr("" + returnData("Latitudine")), CStr("" + returnData("Longitudine")), CInt(returnData("IdCliente")), CDate(returnData("DataCreazione")), _
                                                 CStr("" + returnData("Responsabile").ToString), CStr("" + returnData("NRPraticaGSE").ToString), CStr("" + returnData("Regione").ToString), CStr("" + returnData("ContoEnergia").ToString), CDate(returnData("DataEntrataInEsercizio")), _
                                                 CStr("" + returnData("Attestato").ToString), CDate(returnData("DataAttestato")), CInt(returnData("NRAttestato")), _
@@ -4218,7 +4339,8 @@ Namespace ASPNET.StarterKit.DataAccessLayer
                     Costo = returnData("Costo")
                 End If
 
-                Dim Categoria_Produttore As Categoria_Produttore = New Categoria_Produttore(CInt(returnData("Id")), CInt(returnData("IdCategoria")), CInt(returnData("IdProduttore")), Costo, CDec(returnData("Peso")), CBool(returnData("Professionale")))
+                Dim Categoria_Produttore As Categoria_Produttore = New Categoria_Produttore(CInt(returnData("Id")), CInt(returnData("IdCategoria")), CInt(returnData("IdProduttore")), Costo, CDec(returnData("Peso")), _
+                                                    CBool(returnData("Professionale")))
 
                 categoriaClienteList.Add(Categoria_Produttore)
 
@@ -4253,7 +4375,7 @@ Namespace ASPNET.StarterKit.DataAccessLayer
                     PesoPerUnita = returnData("PesoPerUnita")
                 End If
 
-                Dim Categoria As CategoriaNew = New CategoriaNew(CInt(returnData("Id")), CStr("" + returnData("Nome")).ToString, CStr("" + returnData("TipoDiDato")).ToString, Valore, CInt(returnData("IdMacroCategoria")), CStr("" + returnData("Codifica")), CStr("" + returnData("Raggruppamento")), DataModifica, PesoPerUnita)
+                Dim Categoria As CategoriaNew = New CategoriaNew(CInt(returnData("Id")), CStr("" + returnData("Nome")).ToString, CStr("" + returnData("TipoDiDato")).ToString, Valore, CInt(returnData("IdMacroCategoria")), CStr("" + returnData("Codifica")), CStr("" + returnData("Raggruppamento")), DataModifica, PesoPerUnita, CBool(returnData("Disattiva")))
 
                 categoriaList.Add(Categoria)
 
@@ -4279,7 +4401,8 @@ Namespace ASPNET.StarterKit.DataAccessLayer
                     ValoreForecast = returnData("ValoreDiForecast")
                 End If
 
-                Dim Categoria_Produttore As Categoria_ProduttoreNew = New Categoria_ProduttoreNew(CInt(returnData("Id")), CInt(returnData("IdCategoria")), CInt(returnData("IdProduttore")), Costo, CDec(returnData("Peso")), CBool(returnData("Professionale")), ValoreForecast)
+                Dim Categoria_Produttore As Categoria_ProduttoreNew = New Categoria_ProduttoreNew(CInt(returnData("Id")), CInt(returnData("IdCategoria")), CInt(returnData("IdProduttore")), _
+					Costo, CDec(returnData("Peso")), CBool(returnData("Professionale")), ValoreForecast, Cbool(returnData("Disattiva")))
 
                 categoriaClienteList.Add(Categoria_Produttore)
 
@@ -4440,6 +4563,22 @@ Namespace ASPNET.StarterKit.DataAccessLayer
             Loop
         End Sub
 
+        Private Sub TGenerateListOfProtocolliFromReader(Of T)(ByVal returnData As SqlDataReader, ByRef Lista As List(Of String))
+
+            Do While returnData.Read()
+                Dim myString As String = New String(CStr(returnData("Protocollo")))
+
+                Lista.Add(myString)
+            Loop
+        End Sub
+        Private Sub TGenerateListOfProduttoriFromReader(Of T)(ByVal returnData As SqlDataReader, ByRef Lista As List(Of String))
+
+            Do While returnData.Read()
+                Dim myString As String = New String(CStr(returnData("Produttore")))
+
+                Lista.Add(myString)
+            Loop
+        End Sub
         Private Sub TGenerateListOfMarcheFromReader(Of T)(ByVal returnData As SqlDataReader, ByRef Lista As List(Of String))
 
             Do While returnData.Read()
